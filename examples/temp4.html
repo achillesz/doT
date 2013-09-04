@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="gb2312">
+    <title>模板合并</title>
+    <style type="text/css">
+        .table1{  width:500px; border-collapse:collapse;}
+        .table1 td{border:1px solid #ccc; padding:0 10px; line-height:22px;}
+        .table1 th{ background-color:#eee; border:1px solid #ccc; line-height:30px; font-weight:bold; color:#000; font-family:"microsoft yahei";}
+    </style>
+</head>
+<body>
+
+<script id="headertmpl1" type="text/x-dot-template">
+    <p> {{#def}}</p>
+    <p>{{=it.xx}}</p>
+</script>
+
+<div id="a"></div>
+<div id="b"></div>
+<script type="text/javascript" src="../doT.js"></script>
+<script type="text/javascript">
+    function view(tid,eid,data,def){
+        var pagefn = doT.template(document.getElementById(tid).text,undefined,def || {});
+        alert(pagefn)
+        document.getElementById(eid).innerHTML = pagefn(data);
+    }
+    function callback1(data){
+        var tid = 'headertmpl1',
+                eid = 'b',
+                tid1 = 'headertmpl',
+                def = 222;
+        view(tid,eid,data,def);
+    }
+    callback1({
+        "status":"1",
+        "xx":"hellow！",
+        "result":[
+            {name1:"1",name2:"2",name3:"3",name4:"4"},
+            {name1:"1",name2:"2",name3:"3",name4:"4"},
+            {name1:"1",name2:"2",name3:"3",name4:"4"},
+            {name1:"1",name2:"2",name3:"3",name4:"4"},
+            {name1:"1",name2:"2",name3:"3",name4:"4"}
+        ]
+    })
+</script>
+</body>
+</html>

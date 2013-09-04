@@ -6,7 +6,7 @@
 	</script>
 
 	<script id="pagetmpl" type="text/x-dot-template">
-		<h2>Here is the page using a header template</h2>
+		<h2>Here is the page using a header template 0</h2>
 		{{#def.header}}
 		{{=it.name}}
 	</script>
@@ -17,31 +17,53 @@
 	 </script>
 
 	<script id="pagetmplwithcustomizableheader" type="text/x-dot-template">
-		<h2>Here is the page with customized header template</h2>
+		<h2>Here is the page with customized header template 1</h2>
 		{{##def.mycustominjectionintoheader:
 			<div>{{=it.title}} is not {{=it.name}}</div>
 		#}}
 		{{#def.customheader}}
 		{{=it.name}}
 	</script>
+        <script id="t_test" type="text/template">
+            {{ if(it.success){ }}
+            <h2>results:</h2>
+            <ul>
+                {{ for (var i = 0, l = it.data.length; i < l; i++) { }}
+                <li>
+                    <h5>{{=it.data[i].title}}</h5>
+                    <p>{{!it.data[i].message}}</p>
+                </li>
+                {{ } }}
+                </ul>
+                    {{ }else{ }}
+                    <h2>ÔÝÎÞÊý¾Ý</h2>
+                    {{ } }}
+        </script>
 
-	<script src="../doT.min.js" type="text/javascript"></script>
+	<script src="../doT.js" type="text/javascript"></script>
 	</head>
-
 	<body>
 		<div id="content"></div>
 		<div id="contentcustom"></div>
+        <div id="test"></div>
 	</body>
 
 	<script type="text/javascript">
 		var def = {
-			header: document.getElementById('headertmpl').text,
+			header: '999999999999999',
 			customheader: document.getElementById('customizableheadertmpl').text
 		};
 		var data = {
-			title: "My title",
-			name: "My name"
+			title: "My titleOOOO",
+			name: "My name1"
 		};
+        var data2 = {
+            success:true,
+            data:[
+                {title:"data1",message:'ooo'},
+                {title:'data2',message:'ttt'}
+            ]
+        }
 
 		var pagefn = doT.template(document.getElementById('pagetmpl').text, undefined, def);
 		document.getElementById('content').innerHTML = pagefn(data);
@@ -49,6 +71,8 @@
 		pagefn = doT.template(document.getElementById('pagetmplwithcustomizableheader').text, undefined, def);
 		document.getElementById('contentcustom').innerHTML = pagefn(data);
 
+        var pagefn = doT.template(document.getElementById('t_test').text);
+        document.getElementById('test').innerHTML = pagefn(data2);
 	</script>
 
 </html>
