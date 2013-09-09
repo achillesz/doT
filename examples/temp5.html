@@ -12,10 +12,11 @@
 <body>
 
 <script id="headertmpl1" type="text/x-dot-template">
-     {{##def.d:
-       9999{{#def.a}}8888{{#def.b}}7777{{#def.c}}
-    #}}
-    <p>{{#def.d}}</p>
+       <table class="table1">
+        {{~ it.result :value:i }}
+           <tr><td>value.name1</td><td>value.name2</td><td>value.name3</td><td>value.name4</td></tr>
+        {{~}}
+       </table>
 </script>
 
 <div id="a"></div>
@@ -29,18 +30,19 @@
     }
     function callback1(data){
         var tid = 'headertmpl1',
-                eid = 'b',
+                eid = 'a',
                 tid1 = 'headertmpl1',
                 def = {
-                    a:'a',
-                    b:'b',
+                    xyz:1,
+                    b:99,
                     c:'c'
                 };
         view(tid,eid,data,def);
     }
     callback1({
         "status":"1",
-        "xx":"hellow£¡",
+        "altEmail":"hellow£¡",
+        "altqq":"hellow£¡",
         "result":[
             {name1:"1",name2:"2",name3:"3",name4:"4"},
             {name1:"1",name2:"2",name3:"3",name4:"4"},
